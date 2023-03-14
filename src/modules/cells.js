@@ -1,4 +1,3 @@
-import { BOARD_WIDTH, BOARD_HEIGHT, MINES_COUNT } from './constants.js';
 import {
   getMinesCoordinates,
   getAdjacentMinesCount,
@@ -41,7 +40,7 @@ const expandAdjacentCells = (cell) => {
   adjacentCells.forEach(expandAdjacentCells);
 };
 
-const cellClickEventListener = (event) => {
+const cellClickEventListenerFactory = (minesCount) => (event) => {
   const leftClickedCell = event.target;
 
   if (
@@ -70,7 +69,7 @@ const cellClickEventListener = (event) => {
   expandAdjacentCells(leftClickedCell);
 
   if (
-    document.querySelectorAll('.cell:not(.is-opened)').length === MINES_COUNT
+    document.querySelectorAll('.cell:not(.is-opened)').length === minesCount
   ) {
     stopTimer();
     updateCounter(() => 0);
@@ -99,15 +98,19 @@ const cellContextMenuEventListener = (event) => {
   );
 };
 
-const generateCells = () => {
+const generateCells = ({ boardWidth, boardHeight, minesCount }) => {
   board.innerHTML = '';
 
-  const minesCoordinates = getMinesCoordinates();
+  const minesCoordinates = getMinesCoordinates({
+    boardWidth,
+    boardHeight,
+    minesCount,
+  });
 
-  Array(BOARD_HEIGHT)
+  Array(boardHeight)
     .fill()
     .forEach((_, y) => {
-      Array(BOARD_WIDTH)
+      Array(boardWidth)
         .fill()
         .forEach((_, x) => {
           const cell = document.createElement('div');
@@ -133,7 +136,10 @@ const generateCells = () => {
             setAdjacentMinesCountIndicator({ cell, adjacentMinesCount });
           }
 
-          cell.addEventListener('click', cellClickEventListener);
+          cell.addEventListener(
+            'click',
+            cellClickEventListenerFactory(minesCount)
+          );
           cell.addEventListener('contextmenu', cellContextMenuEventListener);
 
           board.appendChild(cell);

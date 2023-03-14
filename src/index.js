@@ -1,4 +1,4 @@
-import { BOARD_WIDTH, BOARD_HEIGHT, MINES_COUNT } from './modules/constants.js';
+import { getBoardParameters } from './modules/parameters.js';
 import {
   smiley,
   updateCounter,
@@ -8,16 +8,18 @@ import {
 import { board, generateCells } from './modules/cells.js';
 
 const initializeGame = () => {
+  const { boardWidth, boardHeight, minesCount } = getBoardParameters();
+
   stopTimer();
 
   smiley.classList.remove('has-won', 'has-lost');
 
-  board.style.width = `${BOARD_WIDTH * 32}px`;
-  board.style.height = `${BOARD_HEIGHT * 32}px`;
+  board.style.width = `${boardWidth * 32}px`;
+  board.style.height = `${boardHeight * 32}px`;
 
-  updateCounter(() => MINES_COUNT);
+  updateCounter(() => minesCount);
   updateTimer(0);
-  generateCells();
+  generateCells({ boardWidth, boardHeight, minesCount });
 };
 
 smiley.addEventListener('click', initializeGame);

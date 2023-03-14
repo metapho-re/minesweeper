@@ -1,23 +1,41 @@
-import { BOARD_WIDTH, BOARD_HEIGHT, MINES_COUNT, colors } from './constants.js';
+const colors = [
+  'transparent',
+  '#0000ff',
+  '#008200',
+  '#fe0000',
+  '#000084',
+  '#840000',
+  '#008284',
+  '#840084',
+  '#757575',
+];
 
-const getMinesPosition = (minesPosition) => {
-  const newMinePosition = Math.floor(
-    Math.random() * BOARD_WIDTH * BOARD_HEIGHT
-  );
+const getMinesPosition = ({
+  minesPosition,
+  boardWidth,
+  boardHeight,
+  minesCount,
+}) => {
+  const newMinePosition = Math.floor(Math.random() * boardWidth * boardHeight);
 
   if (!minesPosition.includes(newMinePosition)) {
     minesPosition.push(newMinePosition);
   }
 
-  return minesPosition.length === MINES_COUNT
+  return minesPosition.length === minesCount
     ? minesPosition
-    : getMinesPosition(minesPosition);
+    : getMinesPosition({ minesPosition, boardWidth, boardHeight, minesCount });
 };
 
-const getMinesCoordinates = () =>
-  getMinesPosition([]).map((minePosition) => ({
-    x: minePosition % BOARD_WIDTH,
-    y: Math.floor(minePosition / BOARD_WIDTH),
+const getMinesCoordinates = ({ boardWidth, boardHeight, minesCount }) =>
+  getMinesPosition({
+    minesPosition: [],
+    boardWidth,
+    boardHeight,
+    minesCount,
+  }).map((minePosition) => ({
+    x: minePosition % boardWidth,
+    y: Math.floor(minePosition / boardWidth),
   }));
 
 const getAdjacentMinesCount = ({ minesCoordinates, x, y }) =>
