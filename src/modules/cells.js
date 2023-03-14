@@ -129,8 +129,7 @@ const generateCells = ({ boardWidth, boardHeight, minesCount }) => {
           } else {
             const adjacentMinesCount = getAdjacentMinesCount({
               minesCoordinates,
-              x,
-              y,
+              cellCoordinates: { x, y },
             });
 
             setAdjacentMinesCountIndicator({ cell, adjacentMinesCount });

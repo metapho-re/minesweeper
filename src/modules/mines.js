@@ -38,13 +38,13 @@ const getMinesCoordinates = ({ boardWidth, boardHeight, minesCount }) =>
     y: Math.floor(minePosition / boardWidth),
   }));
 
-const getAdjacentMinesCount = ({ minesCoordinates, x, y }) =>
+const getAdjacentMinesCount = ({ minesCoordinates, cellCoordinates }) =>
   minesCoordinates.filter(
     (mineCoordinates) =>
-      mineCoordinates.x >= x - 1 &&
-      mineCoordinates.x <= x + 1 &&
-      mineCoordinates.y >= y - 1 &&
-      mineCoordinates.y <= y + 1
+      mineCoordinates.x >= cellCoordinates.x - 1 &&
+      mineCoordinates.x <= cellCoordinates.x + 1 &&
+      mineCoordinates.y >= cellCoordinates.y - 1 &&
+      mineCoordinates.y <= cellCoordinates.y + 1
   ).length;
 
 const setAdjacentMinesCountIndicator = ({ cell, adjacentMinesCount }) => {
