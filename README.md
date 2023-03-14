@@ -7,6 +7,12 @@ Minesweeper with HTML, CSS and vanilla JavaScript.
 ![lose](./assets/lose.png)
 ![win](./assets/win.png)
 
+## Usage
+
+```
+npx http-server ./src
+```
+
 ## Author
 
 - **Pierre-Alain Castella** - _Initial work_ - [metapho-re](https://github.com/metapho-re)
