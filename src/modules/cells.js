@@ -44,6 +44,7 @@ const cellClickEventListenerFactory = (minesCount) => (event) => {
   const leftClickedCell = event.target;
 
   if (
+    !leftClickedCell.classList.contains('cell') ||
     leftClickedCell.classList.contains('is-opened') ||
     leftClickedCell.classList.contains('is-flagged') ||
     getIsGameOver()
@@ -87,7 +88,11 @@ const cellContextMenuEventListener = (event) => {
 
   const rightClickedCell = event.target;
 
-  if (rightClickedCell.classList.contains('is-opened') || getIsGameOver()) {
+  if (
+    !rightClickedCell.classList.contains('cell') ||
+    rightClickedCell.classList.contains('is-opened') ||
+    getIsGameOver()
+  ) {
     return;
   }
 
