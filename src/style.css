@@ -94,5 +94,5 @@ body {
 }
 
 .cell:not(.is-opened) p {
-  visibility: hidden;
+  display: none;
 }
