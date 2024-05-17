@@ -14,8 +14,8 @@ const updateCounter = (valueGetter) => {
 
   const innerText =
     value >= 0
-      ? String(value).padStart(3, 0)
-      : `-${String(Math.abs(value)).padStart(2, 0)}`;
+      ? String(value).padStart(3, '0')
+      : `-${String(Math.abs(value)).padStart(2, '0')}`;
 
   document.querySelector('#counter').innerText = innerText;
 };
@@ -23,7 +23,7 @@ const updateCounter = (valueGetter) => {
 const updateTimer = (value) => {
   timer = value ?? timer + 1;
 
-  document.querySelector('#timer').innerText = String(timer).padStart(3, 0);
+  document.querySelector('#timer').innerText = String(timer).padStart(3, '0');
 };
 
 const startTimerIfIdle = () => {
