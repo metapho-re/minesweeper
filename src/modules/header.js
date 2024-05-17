@@ -12,7 +12,12 @@ const updateCounter = (valueGetter) => {
 
   counter = value;
 
-  document.querySelector('#counter').innerText = String(value).padStart(3, 0);
+  const innerText =
+    value >= 0
+      ? String(value).padStart(3, 0)
+      : `-${String(Math.abs(value)).padStart(2, 0)}`;
+
+  document.querySelector('#counter').innerText = innerText;
 };
 
 const updateTimer = (value) => {

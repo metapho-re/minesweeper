@@ -28,11 +28,13 @@ body {
   font-size: 2em;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 0;
 }
 
 #counter,
 #timer {
+  width: 62px;
   color: red;
   background-color: black;
 }
