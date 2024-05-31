@@ -18,7 +18,11 @@ const expandAdjacentCells = (cell) => {
   }
 
   cell.classList.add('is-opened');
-  cell.classList.remove('is-flagged');
+
+  if (cell.classList.contains('is-flagged')) {
+    cell.classList.remove('is-flagged');
+    updateCounter((counter) => counter + 1);
+  }
 
   if (cell.classList.contains('has-adjacent-mines')) {
     return;
