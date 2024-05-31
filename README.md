@@ -10,7 +10,7 @@ Minesweeper with HTML, CSS and vanilla JavaScript.
 ## Usage
 
 ```
-npx http-server ./src
+npx http-server -c-1 ./src
 ```
 
 &nbsp;  
